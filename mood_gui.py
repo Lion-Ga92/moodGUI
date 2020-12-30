@@ -27,6 +27,7 @@ lbl_day_stat = Label(frame_2, text="Good day- Bad day\n FOR THE VALUE SCALES 1=G
 lbl_day_stat.grid(row=1, column=1)
 
 #num_1 = DoubleVar()
+# MY QUESTION IS THIS HOW DO I PUT THE SELECTED VALUE AND STORE IT IN THE NUM VALUE
 day_scal = Scale(frame_2, orient=HORIZONTAL, length=500, from_=0, to=5, command=lambda x: day_scal.get())
 day_scal.grid(row=2, column=1)
 
