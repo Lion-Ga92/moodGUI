@@ -1,6 +1,10 @@
 from tkinter import *
 from tkinter import ttk
 from datetime import date
+from classes import mood_Backend
+
+back_end = mood_Backend()
+back_end.set_conn()
 
 root = Tk()
 frame_1 = Frame(root)
@@ -13,11 +17,11 @@ lbl_greet = Label(frame_1, text="Hello!!! And welcome user:    ")
 lbl_greet.grid(row=1, column=1)
 ent_usr = Entry(frame_1, width="10")
 ent_usr.grid(row=1, column=2)
-date_get = date.today()
 ent_date = Entry(frame_1, width="10")
-ent_date.grid(row=1, column=3)
-ent_date.insert(0, date_get)
-
+ent_date.grid(row=1, column=4)
+date_gtr = ent_date.get()
+lbl_date = Label(frame_1, text="Enter date: ")
+lbl_date.grid(row=1, column=3)
 #frame_2 widgets
 
 lbl_day_stat = Label(frame_2, text="Good day- Bad day\n FOR THE VALUE SCALES 1=GOOD 3=STRESSED OUT 5=CRISIS IN CATEGORY")
@@ -96,58 +100,32 @@ lbl_scale_mssg.grid(row=21, column=1)
 
 ent_totals = Entry(frame_2, widt=10)
 ent_totals.grid(row=22, column=1)
-
+total_Vals = ent_totals.get()
 
 lbl_totals = Label(frame_2, text="Out of 50")
 lbl_totals.grid(row=23, column=1)
-#FRAME 3 WIDGETS:
 
-lbl_main_dis = Label(frame_3, text="Main")
-lbl_main_dis.grid(row=2, column=1)
-lbl_drink = Label(frame_3, text="Drink")
-lbl_drink.grid(row=3, column=1)
-lbl_snk1 = Label(frame_3, text="Snack")
-lbl_snk1.grid(row=4, column=1)
-lbl_snk2 = Label(frame_3, text="Other snack")
-lbl_snk2.grid(row=5, column=1)
-lbl_breakf = Label(frame_3, text="Breakfast")
-lbl_breakf.grid(row=1, column=2)
-ent_bf_main = Entry(frame_3, width=20)
-ent_bf_main.grid(row=2, column=2)
-ent_bf_dr = Entry(frame_3, width=20)
-ent_bf_dr.grid(row=3, column=2)
-ent_bf_sn1 = Entry(frame_3, width=20)
-ent_bf_sn1.grid(row=4, column=2)
-ent_dinr_sna2 = Entry(frame_3, width=20)
-ent_dinr_sna2.grid(row=5, column=2)
+def confirming_logs():
+    my_name = ent_usr.get()
+    date_ob = date_gtr
+    day_check = day_rate.get()
+    mood_check = mood_rate.get()
+    sleep_check = sleep_rate.get()
+    anx_chec = anx_rate.get()
+    depress_check = depre_rate.get()
+    obsess_check = obsess_rate.get()
+    sprt_check = sprt_rate.get()
+    hygie_check = hygia_rate.get()
+    diet_check = diet_rate.get()
+    workout_check = workout_rate.get()
+    tots_vals = ent_totals.get()
+    back_end.add_Vals(my_name, date_ob, day_check, mood_check, sleep_check, anx_chec, depress_check, obsess_check, sprt_check, hygie_check, diet_check, workout_check, tots_vals)
 
 
-#FRAME 4 WIDGETS:
-lbl_lunch = Label(frame_3, text="Lunch")
-lbl_lunch.grid(row=1, column=3)
-ent_lunch_main = Entry(frame_3, width=20)
-ent_lunch_main.grid(row=2, column=3)
-ent_lunch_dr = Entry(frame_3, width=20)
-ent_lunch_dr.grid(row=3, column=3)
-ent_lunch_sn1 = Entry(frame_3, width=20)
-ent_lunch_sn1.grid(row=4, column=3)
-ent_dinr_sna2 = Entry(frame_3, width=20)
-ent_dinr_sna2.grid(row=5, column=3)
-
-
-#FRAME 5 WIDGETS
-lbl_dinner = Label(frame_3, text="Dinner")
-lbl_dinner.grid(row=1, column=4)
-ent_dinr_main = Entry(frame_3, width=20)
-ent_dinr_main.grid(row=2, column=4)
-ent_dinr_dr = Entry(frame_3, width=20)
-ent_dinr_dr.grid(row=3, column=4)
-ent_dinr_sna1 = Entry(frame_3, width=20)
-ent_dinr_sna1.grid(row=4, column=4)
-ent_dinr_sna2 = Entry(frame_3, width=20)
-ent_dinr_sna2.grid(row=5, column=4)
-
-
-bttn_ent1 = Button(frame_1, text="Log Data", command=lambda: ent_totals.insert(0, (int(day_rate.get()) + int(mood_rate.get()) + int(sleep_rate.get()) + int(anx_rate.get()) + int(depre_rate.get()) + int(obsess_rate.get()) + int(sprt_rate.get()) + int(hygia_rate.get()) + int(diet_rate.get()) + int(workout_rate.get()))))
-bttn_ent1.grid(row=1, column=4)
+bttn_ent1 = Button(frame_1, text="Sum up: ", command=lambda: ent_totals.insert(0, (int(day_rate.get()) + int(mood_rate.get()) + int(sleep_rate.get()) + int(anx_rate.get()) + int(depre_rate.get()) + int(obsess_rate.get()) + int(sprt_rate.get()) + int(hygia_rate.get()) + int(diet_rate.get()) + int(workout_rate.get()))))
+bttn_ent1.grid(row=2, column=2)
+btt_ent2 = Button(frame_1, text="confirm log", command=confirming_logs)
+btt_ent2.grid(row=2, column=3)
+bttn_nxt = Button(frame_1, text="Next phase:", command= lambda : back_end.view_log())
+bttn_nxt.grid(row=2, column=4)
 root.mainloop()
