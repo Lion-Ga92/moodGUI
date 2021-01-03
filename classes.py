@@ -14,7 +14,7 @@ class mood_Backend:
 
         self.c = self.conn.cursor()
 
-        self.c.execute("""CREATE TABLE IF NOT EXISTS moodBarometer ('usr_name' TEXT,
+        self.c.execute("""CREATE TABLE IF NOT EXISTS moodBarometer ('user_name' TEXT,
                         'date' TEXT, 'day_Rate' INTEGER, 'mood_Rate' INTEGER, 'sleep_Rate' INTEGER,
                         'anxiety_Rate' INTEGER, 'depression_Rate' INTEGER, 'obsession_Rate' INTEGER,
                         'spiritual_Rate' INTEGER, 'hygiene_Rate' INTEGER, 'diet_Rate' INTEGER, workout_Rate INTEGER, 
@@ -59,13 +59,15 @@ class mood_Backend:
         self.c = self.conn.cursor()
         for self.row in self.c.execute("SELECT * FROM moodBarometer;"):
             data = self.c.fetchall()
-        txt_display.insert("1.0", data)
+        txt_display.insert("1.0", """Hello these are your values to confirm for today:\nleft to right are: Day rating, mood rating,\n sleep rating, anxiety rating, depresion rating, obsession rating,\n spiritual rating hygiene rating, diet rating, work out ratings\n and total value. """)
+        txt_display.insert(END, data)
         get_log = txt_display.get("1.0", END)
         
         def add_to_txtFile():
-            file_1 = open("mood_log.txt","a")
+            file_1 = open("mood_log.txt", "a")
             file_1.write(get_log)
-            file_1.close
+            file_1.close()
+    
 
         enter_button = Button(frame_2, text="Log in data", command=add_to_txtFile)
         enter_button.pack()

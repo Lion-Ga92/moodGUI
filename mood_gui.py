@@ -19,7 +19,6 @@ ent_usr = Entry(frame_1, width="10")
 ent_usr.grid(row=1, column=2)
 ent_date = Entry(frame_1, width="10")
 ent_date.grid(row=1, column=4)
-date_gtr = ent_date.get()
 lbl_date = Label(frame_1, text="Enter date: ")
 lbl_date.grid(row=1, column=3)
 #frame_2 widgets
@@ -46,21 +45,21 @@ sleep_rate = StringVar()
 sleep_sc = Scale(frame_2, orient=HORIZONTAL, variable=sleep_rate, length=500, from_="1", to="5")
 sleep_sc.grid(row=6, column=1)
 
-lbl_anxiet = Label(frame_2, text="Anxiety", width="16")
+lbl_anxiet = Label(frame_2, text="Anxiety:", width="16")
 lbl_anxiet.grid(row=7, column=1)
 
 anx_rate = StringVar()
 scal_anx = Scale(frame_2, orient=HORIZONTAL, variable= anx_rate, length=500, from_="1", to="5")
 scal_anx.grid(row=8, column=1)
 
-lbl_depre = Label(frame_2, text="Depression", width="16")
+lbl_depre = Label(frame_2, text="Depression:", width="16")
 lbl_depre.grid(row=9, column=1)
 
 depre_rate = StringVar()
 depr_scal = Scale(frame_2, orient=HORIZONTAL, variable=depre_rate, length=500, from_="1", to="5")
 depr_scal.grid(row=10, column=1)
 
-lbl_obsess = Label(frame_2, text="Obessesion", width="16")
+lbl_obsess = Label(frame_2, text="Obessesion:", width="16")
 lbl_obsess.grid(row=11, column=1)
 
 obsess_rate = StringVar()
@@ -74,21 +73,21 @@ sprt_rate = StringVar()
 sprt_scal = Scale(frame_2, orient=HORIZONTAL, variable=sprt_rate, length=500, from_="1", to="5")
 sprt_scal.grid(row=14, column=1)
 
-lbl_hygiea= Label(frame_2, text="Hygiene", width="16")
+lbl_hygiea= Label(frame_2, text="Hygiene:", width="16")
 lbl_hygiea.grid(row=15, column=1)
 
 hygia_rate = StringVar()
 hygiea_scal = Scale(frame_2, orient=HORIZONTAL, variable= hygia_rate, length=500, from_="1", to="5")
 hygiea_scal.grid(row=16, column=1)
 
-lbl_diet = Label(frame_2, text="diet", width="16")
+lbl_diet = Label(frame_2, text="diet:", width="16")
 lbl_diet.grid(row=17, column=1)
 
 diet_rate = StringVar()
 diet_scal = Scale(frame_2, orient=HORIZONTAL, variable=diet_rate, length=500, from_="1", to="5")
 diet_scal.grid(row=18, column=1)
 
-lbl_exercise = Label(frame_2, text="Exercise", width="16")
+lbl_exercise = Label(frame_2, text="Exercise:", width="16")
 lbl_exercise.grid(row=19, column=1)
 
 workout_rate = StringVar()
@@ -107,7 +106,7 @@ lbl_totals.grid(row=23, column=1)
 
 def confirming_logs():
     my_name = ent_usr.get()
-    date_ob = date_gtr
+    date_gtr = ent_date.get()
     day_check = day_rate.get()
     mood_check = mood_rate.get()
     sleep_check = sleep_rate.get()
@@ -119,7 +118,7 @@ def confirming_logs():
     diet_check = diet_rate.get()
     workout_check = workout_rate.get()
     tots_vals = ent_totals.get()
-    back_end.add_Vals(my_name, date_ob, day_check, mood_check, sleep_check, anx_chec, depress_check, obsess_check, sprt_check, hygie_check, diet_check, workout_check, tots_vals)
+    back_end.add_Vals(my_name, date_gtr, day_check, mood_check, sleep_check, anx_chec, depress_check, obsess_check, sprt_check, hygie_check, diet_check, workout_check, tots_vals)
 
 
 bttn_ent1 = Button(frame_1, text="Sum up: ", command=lambda: ent_totals.insert(0, (int(day_rate.get()) + int(mood_rate.get()) + int(sleep_rate.get()) + int(anx_rate.get()) + int(depre_rate.get()) + int(obsess_rate.get()) + int(sprt_rate.get()) + int(hygia_rate.get()) + int(diet_rate.get()) + int(workout_rate.get()))))
